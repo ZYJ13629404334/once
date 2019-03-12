@@ -1,6 +1,6 @@
-# travel
 
-> A Vue.js project
+just another repository
+ A Vue.js project
 
 ## Build Setup
 
