@@ -26,7 +26,7 @@ export default{
     line-height:.86rem
     height: .86rem
     background: $bgColor
-    color: #fff
+    color: #000
     .header-left
       width:.64rem
       float: left
