@@ -1,10 +1,10 @@
 <template>
   <div class="icons">
-   <swiper>
-    <swiper-slide>
+   <swiper :options="swiperOption">
+    <swiper-slide v-for="(page, index) of pages" :key="index">
       <div
         class="icon"
-        v-for="item of iconList"
+        v-for="item of page"
         :key="item.id"
       >
         <div class="icon-img">
@@ -20,51 +20,20 @@
 <script>
 export default {
   name: 'HomeIcons',
+  props: {
+    list: Array
+  },
   data () {
     return {
-      iconList: [{
-        id: '0001',
-        imgUrl: '//imgs.qunarzz.com/vs_ceph_vs_tts/c0b277d4-7256-443f-b2a5-0623eb45e97d.jpg_r_480x320x90_b465b207.jpg',
-        desc: '景点门票'
-      }, {
-        id: '0002',
-        imgUrl: 'https://imgs.qunarzz.com/p/tts4/1607/d7/dfeb48fffc09669a.jpg_r_390x260x90_f3aa787e.jpg',
-        desc: '滑雪体验1'
-      }, {
-        id: '0003',
-        imgUrl: 'https://imgs.qunarzz.com/p/tts4/1607/d7/dfeb48fffc09669a.jpg_r_390x260x90_f3aa787e.jpg',
-        desc: '滑雪体验2'
-      }, {
-        id: '0004',
-        imgUrl: 'https://imgs.qunarzz.com/p/tts4/1607/d7/dfeb48fffc09669a.jpg_r_390x260x90_f3aa787e.jpg',
-        desc: '滑雪体验3'
-      }, {
-        id: '0005',
-        imgUrl: 'https://imgs.qunarzz.com/p/tts4/1607/d7/dfeb48fffc09669a.jpg_r_390x260x90_f3aa787e.jpg',
-        desc: '滑雪体验4'
-      }, {
-        id: '0006',
-        imgUrl: 'https://imgs.qunarzz.com/p/tts4/1607/d7/dfeb48fffc09669a.jpg_r_390x260x90_f3aa787e.jpg',
-        desc: '滑雪体验5'
-      }, {
-        id: '0007',
-        imgUrl: 'https://imgs.qunarzz.com/p/tts4/1607/d7/dfeb48fffc09669a.jpg_r_390x260x90_f3aa787e.jpg',
-        desc: '滑雪体验6'
-      }, {
-        id: '0008',
-        imgUrl: 'https://imgs.qunarzz.com/p/tts4/1607/d7/dfeb48fffc09669a.jpg_r_390x260x90_f3aa787e.jpg',
-        desc: '滑雪体验7'
-      }, {
-        id: '0009',
-        imgUrl: 'https://imgs.qunarzz.com/p/tts4/1607/d7/dfeb48fffc09669a.jpg_r_390x260x90_f3aa787e.jpg',
-        desc: '滑雪体验8'
-      }]
+      swiperOption: {
+        autoplay: false
+      }
     }
   },
   computed: {
     pages () {
       const pages = []
-      this.iconList.forEach((item, index) => {
+      this.list.forEach((item, index) => {
         const page = Math.floor(index / 8)
         if (!pages[page]) {
           pages[page] = []
@@ -79,6 +48,7 @@ export default {
 
 <style lang="stylus" scoped>
   @import '~styles/varibles.styl'
+  @import '~styles/mixins.styl'
   .icons >>> .swiper-container
     height: 0
     padding-bottom: 50%
@@ -114,4 +84,5 @@ export default {
         text-align: center
         line-height: .44rem
         color: $darkTextColor
+        ellipsis ()
 </style>
